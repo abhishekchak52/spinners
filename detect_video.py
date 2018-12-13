@@ -1,7 +1,7 @@
 import numpy as np 
 import cv2
 
-cap = cv2.VideoCapture('webcam.avi')
+cap = cv2.VideoCapture('data/webcam.mp4')
 
 green_sensitivity = 7
 pink_sensitivity = 10

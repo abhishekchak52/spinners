@@ -136,3 +136,5 @@ dmypy.json
 # End of https://www.gitignore.io/api/python,visualstudiocode
 data/*
 
+.DS_Store
+.vscode/settings.json
