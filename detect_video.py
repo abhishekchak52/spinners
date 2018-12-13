@@ -41,20 +41,31 @@ while(cap.isOpened()):
             centres.append(c)
 
     # Now we draw and mark the centres of each green marker
-
+    centre_coords = []
     for c in centres:
         M = cv2.moments(c)
         # calculate x,y coordinate of center
         cX = int(M["m10"] / M["m00"])
         cY = int(M["m01"] / M["m00"])
         cv2.circle(res, (cX, cY), 2, (0, 0, 255), -1)
-
+        centre_coords.append([cX,cY])
 
     cv2.drawContours(res,centres,-1,color=(255,0,0))  
+    window_size = 180
+    for index, centre in enumerate(centre_coords):
+        cen_x, cen_y = centre
+        min_x = max(cen_x - window_size//2, 0)
+        max_x = min(cen_x + window_size//2, 639)
+        min_y = max(cen_y - window_size//2, 0)
+        max_y = min(cen_y + window_size//2, 479)
+        # cv2.rectangle(res,(min_x,min_y),(max_x,max_y),(0,0,255))
 
+        # Apparently for ROI the indices work in the reverse order [y,x]
+        roi = res[min_y:max_y,min_x:max_x]
+        cv2.imshow("spinner"+str(index), roi)
 
-    cv2.imshow('Mask', mask)
-    cv2.imshow('Detected', res)
+    # cv2.imshow('Mask', mask)
+    # cv2.imshow('Detected', res)
 
     if cv2.waitKey(25) & 0xFF == ord('q'):
         break

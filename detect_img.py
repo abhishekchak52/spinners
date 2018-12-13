@@ -33,6 +33,7 @@ _, green_ctrs, _ = cv2.findContours(centre_mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_S
 centres = []
 for c in green_ctrs:
     M = cv2.moments(c)
+
     if M["m00"] > 300:
         centres.append(c)
 
@@ -51,15 +52,18 @@ for c in centres:
 cv2.drawContours(res,centres,-1,color=(255,0,0))  
 
 # Let's try to isolate each spinner
-window_size = 160
-for centre in centre_coords:
+window_size = 180
+for index, centre in enumerate(centre_coords):
 	cen_x, cen_y = centre
 	min_x = max(cen_x - window_size//2, 0)
 	max_x = min(cen_x + window_size//2, 639)
 	min_y = max(cen_y - window_size//2, 0)
 	max_y = min(cen_y + window_size//2, 479)
-	cv2.rectangle(res,(min_x,min_y),(max_x,max_y),(0,0,255))
+	# cv2.rectangle(res,(min_x,min_y),(max_x,max_y),(0,0,255))
 
+	# Apparently for ROI the indices work in the reverse order [y,x]
+	roi = res[min_y:max_y,min_x:max_x]
+	cv2.imshow("spinner"+str(index), roi)
 
 
 # cv2.imshow('Mask', mask)
