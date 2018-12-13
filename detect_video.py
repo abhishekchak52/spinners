@@ -1,7 +1,17 @@
+import argparse
 import numpy as np 
 import cv2
 
-cap = cv2.VideoCapture('data/webcam.mp4')
+
+# Code for parsing command line arguments
+
+parser = argparse.ArgumentParser(description='Detects centres and arms in a video')
+parser.add_argument('filename', metavar='F', type=str, help='Path to the video file for detection')
+
+args = parser.parse_args()
+
+# Read in the appropriate file
+cap = cv2.VideoCapture(args.filename)
 
 green_sensitivity = 7
 pink_sensitivity = 10

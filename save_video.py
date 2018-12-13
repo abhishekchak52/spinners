@@ -1,10 +1,18 @@
+import argparse
 import numpy as np
 import cv2
 
-cap = cv2.VideoCapture(1)
+# Code for parsing command line arguments
+
+parser = argparse.ArgumentParser(description='Captures video from the webcam and saves it to a file')
+parser.add_argument('output', type=str, help='name of the output file')
+
+args = parser.parse_args()
+
+cap = cv2.VideoCapture(0)
 
 fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-out = cv2.VideoWriter('webcam.mp4', fourcc, 50.0, (640,480))
+out = cv2.VideoWriter(args.output+'.mp4', fourcc, 50.0, (640,480))
 
 while(cap.isOpened()):
     ret, frame = cap.read()

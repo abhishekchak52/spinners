@@ -1,7 +1,15 @@
+import argparse
 import numpy as np 
 import cv2
 
-img  = cv2.imread('data/snap.png')
+# Code for parsing command line arguments
+
+parser = argparse.ArgumentParser(description='Detects centres and arms in an image')
+parser.add_argument('filename', metavar='F', type=str, help='Path to the image file for detection')
+
+args = parser.parse_args()
+
+img  = cv2.imread(args.filename)
 hsv_frame = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
 green_sensitivity = 7
