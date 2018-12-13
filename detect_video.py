@@ -48,6 +48,7 @@ while(cap.isOpened()):
         cX = int(M["m10"] / M["m00"])
         cY = int(M["m01"] / M["m00"])
         cv2.circle(res, (cX, cY), 2, (0, 0, 255), -1)
+        cv2.circle(res, (cX, cY), 80, (0, 0, 255), 1)
         centre_coords.append([cX,cY])
 
     cv2.drawContours(res,centres,-1,color=(255,0,0))  

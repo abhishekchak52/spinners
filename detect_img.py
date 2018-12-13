@@ -45,6 +45,7 @@ for c in centres:
 	cX = int(M["m10"] / M["m00"])
 	cY = int(M["m01"] / M["m00"])
 	cv2.circle(res, (cX, cY), 2, (0, 0, 255), -1)
+	cv2.circle(res, (cX, cY), 80, (0, 0, 255), 1)
 	# print('x = {}y = {}'.format(cX,cY))
 	centre_coords.append([cX,cY])
 
