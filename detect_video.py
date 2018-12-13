@@ -38,7 +38,6 @@ while(cap.isOpened()):
     for c in green_ctrs:
         M = cv2.moments(c)
         if M["m00"] > 300:
-            print(M["m00"])
             centres.append(c)
 
     # Now we draw and mark the centres of each green marker
